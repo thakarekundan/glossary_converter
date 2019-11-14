@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>GLOSSARY CONVERTER</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body><div class="navbar-fixed">
+   <nav class="grey darken-4" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="#" class="brand-logo">GLOSSARY CONVERTER</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+         <li><a href="#descripition">GLOSSARY CONVERTER</a></li>
+         <li><a href="#upload">Upload</a></li>
+         <li><a href="{{ url_for('services') }}">Services</a></li>
+         <li><a href="/#aboutapp">About</a></li>
+      </ul>
+
+
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+</div>
+	<ul id="nav-mobile" class="sidenav">
+        <li><a href="#">Home</a></li>
+         <li><a href="#">GLOSSARY CONVERTER</a></li>
+         <li><a href="#">Services</a></li>
+         <li><a href="#">About</a></li>
+      </ul>
+<!--Slider -->
+ <section class="slider">
+  <div id="index-banner" class="parallax-container">
+     <ul class="slides">
+      <li>
+        <div class="caption center-align">
+          <h2>Glossary Simplified</h2>
+          <h5 class="light grey-text text-lighten-3 hide-on-small-only">
+           Using NLTK Library
+          </h5>
+
+
+        </div>
+      </li>
+      <li>
+        <div class="caption left-align">
+          <h2>Glossary Converter with Different Services</h2>
+          <h5 class="light grey-text text-lighten-3 hide-on-small-only">
+           NLP based App
+          </h5>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- Start of Main Section -->
+ <div class="container" id="upload">
+    <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="input-field col s12 m10">
+          <div class="icon-block">
+           <h2 class="center brown-text"><i class="material-icons"></i></h2>
+           <form method="POST" action="/analyze"  enctype = "multipart/form-data">
+
+          <input name="rawtext" type="file" class="form-control" accept="application/pdf, application/vnd.ms-excel" />
+         <br/>
+         <button class="btn btn-small waves-effect waves-light light-blue lighten-1" type="reset">Clear</button>
+          <button class="btn btn-small waves-effect waves-light purple lighten-1" type="submit">Convert To Glossary</button>
+          <font color="red"> {{ input }}</font>
+        </form>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+  <!-- End -->
+
+  <!-- Result Display-->
+  <section class="section section-solutions-about grey darken-2">
+ <div class="container white-text">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="material-icons"></i></h2>
+            <h5 class="center">Your PDF</h5>
+            <div class="" role="alert">
+           <p>Total Time: <span style="color:#0091EA;"> {{ final_time }} seconds</span></p>
+        </div>
+            <p class="light">{{ctext}}</p>
+             <div class="alert alert-info" role="alert"><p> <span style="color:#0091EA;"></span></p><br/>
+
+
+        </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6 grey darken-3">
+          <div class="icon-block">
+          <h2 class="center brown-text"><i class="material-icons"></i></h2>
+            <h5 class="center">Glossary</h5>
+        
+           <!-- <p class="light">{{ final_summary }}</p> -->
+
+           <table>
+    
+{%  for key in final_summary %}
+   <tr>
+        <th> {{ key }} </th>
+        <td> {{ final_summary[key] }} </td>
+   </tr>
+{% endfor %}
+</table>
+<p>{{ text1 }}</p>
+<form action="/download" method = "get">
+        <input type="hidden" name="file" value="{{ctext}}">
+        <input type="submit" value="Download">
+</form>
+          </div>
+        </div>
+
+      </div>
+
+
+  </div>
+</section>
+
+
+
+
+
+<div class="card md-6" id="descripition">
+  <img src="static/img/imagess.jpg" class="card-img-top" height="300" width="1150">
+  <div class="card-body">
+  <center>  <h2 class="card-title"><b>Glossary creation using NLP</b></h2>
+        <h5 class="card-title">“Glossary is an important part of any book; it makes a book complete.”</h5>
+    </center>
+    <p class="card-text">A glossary, also known as vocabulary, is a list of alphabetically well-arranged words. A glossary is also known as a lexicon, wordbook. Glossary plays an important role as a tool to learn new words.
+          This project discusses the result of the work done in development of GLOSSARY CREATION. In this project we demonstrate a prototype solution in which we built a dedicated platform for students, or high-tech readers. The aim is to enable them to reach their requirements using a convert feature.
+</p>
+
+  </div>
+</div>
+
+
+  <footer class="page-footer grey darken-4">
+    <div class="container" id="aboutapp">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">About Glossary Converter App</h5>
+          <p class="grey-text text-lighten-4">Using NLTK Library for Glossary Converter with different additional servies
+.</p>
+
+
+        </div>
+
+   <div class="float-right md-6 ">
+          <h5 class="white-text">Connect With Me</h5>
+          <ul>
+          <a href="#" target="_blank" class="white-text">
+            <i class="fab fa-linkedin fa-4x"></i>
+          </a>
+           <a href="#" target="_blank" class="white-text">
+            <i class="fab fa-github-square fa-4x"></i>
+          </a>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="white-text text-lighten-3" href="#">CS RATHORE(PROJECT LEADER)</a><br/>
+      <a class="white-text text-lighten-3" href="#">cs rathore@projectleader.com</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.js"></script>
+  <script src="static/js/init.js"></script>
+  </body>
+</html>
